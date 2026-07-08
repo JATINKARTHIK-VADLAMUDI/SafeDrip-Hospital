@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Bed</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+🛏️
+</div>
+
+<h1 id="wardTitle"></h1>
+
+<h2>Select Bed</h2>
+
+<div id="beds"></div>
+
+<a class="back" href="ward.html">
+← Back
+</a>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+
+const ward = localStorage.getItem("selectedWard");
+
+document.getElementById("wardTitle").innerHTML = ward;
+
+const bedArea=document.getElementById("beds");
+
+/*
+------------------------------------------------
+
+CHANGE ONLY THESE LINKS
+
+Later you'll replace them with your
+Netlify dashboard links.
+
+------------------------------------------------
+*/
+
+const dashboardLinks={
+
+"Bed-01":"https://YOUR-LINK-1.netlify.app",
+"Bed-02":"https://YOUR-LINK-2.netlify.app",
+"Bed-03":"https://YOUR-LINK-3.netlify.app",
+"Bed-04":"https://YOUR-LINK-4.netlify.app",
+"Bed-05":"https://YOUR-LINK-5.netlify.app",
+"Bed-06":"https://YOUR-LINK-6.netlify.app",
+"Bed-07":"https://YOUR-LINK-7.netlify.app",
+"Bed-08":"https://YOUR-LINK-8.netlify.app",
+"Bed-09":"https://YOUR-LINK-9.netlify.app",
+"Bed-10":"https://YOUR-LINK-10.netlify.app"
+
+};
+
+Object.keys(dashboardLinks).forEach(function(bed){
+
+bedArea.innerHTML +=
+
+`
+<div class="card"
+
+onclick="window.location.href='${dashboardLinks[bed]}'">
+
+${bed}
+
+</div>
+
+`;
+
+});
+
+</script>
+
+</body>
+
+</html>

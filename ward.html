@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Ward</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+🏥
+</div>
+
+<h1 id="floorTitle"></h1>
+
+<h2>Select Ward</h2>
+
+<div id="wards"></div>
+
+<a class="back" href="floor.html">
+← Back
+</a>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+
+const floor = localStorage.getItem("selectedFloor");
+
+document.getElementById("floorTitle").innerHTML = floor;
+
+let wardList = [];
+
+if(floor=="Ground Floor")
+{
+    wardList=[
+        "Emergency",
+        "Observation Ward"
+    ];
+}
+else if(floor=="First Floor")
+{
+    wardList=[
+        "ICU",
+        "NICU",
+        "PICU",
+        "CCU"
+    ];
+}
+else if(floor=="Second Floor")
+{
+    wardList=[
+        "General Ward",
+        "Private Ward",
+        "Semi-Private Ward"
+    ];
+}
+else
+{
+    wardList=[
+        "Surgical Ward",
+        "Recovery Ward"
+    ];
+}
+
+const area=document.getElementById("wards");
+
+wardList.forEach(function(ward){
+
+area.innerHTML +=
+`
+<div class="card"
+onclick="goToWard('${ward}')">
+
+${ward}
+
+</div>
+`;
+
+});
+
+</script>
+
+</body>
+
+</html>
