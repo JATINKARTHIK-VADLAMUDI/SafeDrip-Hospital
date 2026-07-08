@@ -123,37 +123,81 @@ LOGIN
 
 <script>
 
-function login(){
+const SERVER = "https://safedrip-backend.onrender.com";
 
-const role=document.getElementById("role").value;
+async function login(){
 
-const user=document.getElementById("username").value;
+    const role = document.getElementById("role").value;
 
-const pass=document.getElementById("password").value;
+    const username = document.getElementById("username").value;
 
-if(role==="Admin" && user==="admin" && pass==="admin123"){
+    const password = document.getElementById("password").value;
 
-window.location.href="admin.html";
+    try{
 
-}
+        const response = await fetch(SERVER + "/api/login",{
 
-else if(role==="Doctor" && user==="doctor" && pass==="doctor123"){
+            method:"POST",
 
-window.location.href="doctor.html";
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-}
+            body:JSON.stringify({
+                username:username,
+                password:password
+            })
 
-else if(role==="Nurse" && user==="nurse" && pass==="nurse123"){
+        });
 
-window.location.href="nurse.html";
+        const result = await response.json();
 
-}
+        if(!result.success){
 
-else{
+            alert(result.message);
 
-alert("Invalid Login");
+            return;
 
-}
+        }
+
+        if(result.role !== role){
+
+            alert("Selected role does not match your account.");
+
+            return;
+
+        }
+
+        localStorage.setItem("userName", result.name);
+        localStorage.setItem("userRole", result.role);
+
+        if(result.role==="Admin"){
+
+            window.location.href="admin.html";
+
+        }
+
+        else if(result.role==="Doctor"){
+
+            window.location.href="doctor.html";
+
+        }
+
+        else if(result.role==="Nurse"){
+
+            window.location.href="nurse.html";
+
+        }
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        alert("Unable to connect to the server.");
+
+    }
 
 }
 
