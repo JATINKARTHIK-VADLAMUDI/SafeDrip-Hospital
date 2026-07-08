@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Floor</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f4c81,#36c2ce);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:white;
+width:90%;
+max-width:500px;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+text-align:center;
+}
+
+h1{
+color:#0f4c81;
+margin-bottom:10px;
+}
+
+h2{
+color:#555;
+margin-bottom:30px;
+}
+
+.floor{
+background:#0f4c81;
+color:white;
+padding:18px;
+margin:15px 0;
+border-radius:12px;
+font-size:20px;
+cursor:pointer;
+transition:.3s;
+}
+
+.floor:hover{
+background:#36c2ce;
+transform:scale(1.03);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏥 ABC MULTISPECIALITY HOSPITAL</h1>
+
+<h2>Select Floor</h2>
+
+<div class="floor" onclick="goFloor('ground')">
+Ground Floor
+</div>
+
+<div class="floor" onclick="goFloor('first')">
+First Floor
+</div>
+
+<div class="floor" onclick="goFloor('second')">
+Second Floor
+</div>
+
+<div class="floor" onclick="goFloor('third')">
+Third Floor
+</div>
+
+</div>
+
+<script>
+
+function goFloor(floor){
+
+window.location.href="ward.html?floor="+floor;
+
+}
+
+</script>
+
+</body>
+</html>
