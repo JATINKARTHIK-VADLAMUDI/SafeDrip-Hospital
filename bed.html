@@ -70,23 +70,11 @@ const dashboardLinks={
 
 Object.keys(dashboardLinks).forEach(function(bed){
 
-bedArea.innerHTML +=
-
-`
+bedArea.innerHTML += `
 <div class="card"
-
-onclick="
-window.location.href =
-dashboardLinks[bed]
-+ '?floor=' + encodeURIComponent(localStorage.getItem('selectedFloor'))
-+ '&ward=' + encodeURIComponent(localStorage.getItem('selectedWard'))
-+ '&bed=' + encodeURIComponent(bed)
-"
-
+onclick="window.location.href='${dashboardLinks[bed]}?floor='+encodeURIComponent(localStorage.getItem('selectedFloor'))+'&ward='+encodeURIComponent(localStorage.getItem('selectedWard'))+'&bed='+encodeURIComponent(bed)">
 ${bed}
-
 </div>
-
 `;
 
 });
