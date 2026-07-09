@@ -51,49 +51,6 @@ color:#0d5b99;
 
 }
 
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-gap:20px;
-
-padding:30px;
-
-}
-
-.card{
-
-background:white;
-
-padding:30px;
-
-border-radius:15px;
-
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-
-cursor:pointer;
-
-text-align:center;
-
-font-size:22px;
-
-font-weight:bold;
-
-transition:.3s;
-
-}
-
-.card:hover{
-
-transform:scale(1.05);
-
-background:#0d5b99;
-
-color:white;
-
-}
 
 .logout{
 
@@ -119,6 +76,88 @@ font-weight:bold;
 
 }
 
+.dashboard{
+
+display:flex;
+
+margin:20px;
+
+gap:20px;
+
+}
+
+.sidebar{
+
+width:240px;
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.menu{
+
+padding:15px;
+
+font-size:18px;
+
+border:none;
+
+background:#f4f7fb;
+
+border-radius:10px;
+
+cursor:pointer;
+
+text-align:left;
+
+transition:.3s;
+
+}
+
+.menu:hover{
+
+background:#0d5b99;
+
+color:white;
+
+}
+
+.active{
+
+background:#0d5b99;
+
+color:white;
+
+}
+
+.content{
+
+flex:1;
+
+background:white;
+
+border-radius:15px;
+
+padding:30px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+min-height:550px;
+
+}
+
 </style>
 
 </head>
@@ -138,66 +177,60 @@ Welcome,
 <span id="adminName"></span>
 
 </div>
+  
+<div class="dashboard">
 
-<div class="grid">
+<div class="sidebar">
 
-<div class="card">
+<button class="menu active">
+🏠 Dashboard
+</button>
 
-👤
+<button class="menu">
+👤 Patients
+</button>
 
-<br><br>
+<button class="menu">
+🛏 Beds
+</button>
 
-Patients
+<button class="menu">
+📡 Transmitters
+</button>
 
-</div>
+<button class="menu">
+👨‍⚕️ Doctors
+</button>
 
-<div class="card">
+<button class="menu">
+👩‍⚕️ Nurses
+</button>
 
-🛏
+<button class="menu">
+📊 Reports
+</button>
 
-<br><br>
+<button class="menu">
+⚙ Settings
+</button>
 
-Beds
+<a class="logout" href="login.html">
 
-</div>
+🚪 Logout
 
-<div class="card">
-
-📡
-
-<br><br>
-
-Transmitters
-
-</div>
-
-<div class="card">
-
-👨‍⚕️
-
-<br><br>
-
-Doctors
-
-</div>
-
-<div class="card">
-
-👩‍⚕️
-
-<br><br>
-
-Nurses
+</a>
 
 </div>
 
-<div class="card">
+<div class="content">
 
-📊
+<h2>Dashboard</h2>
 
-<br><br>
+<p>
 
-Reports
+Welcome to SafeDrip Hospital Management System.
+
+</p>
 
 </div>
 
