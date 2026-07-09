@@ -224,6 +224,37 @@ background:#083d66;
 
 }
 
+.patientForm{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.patientForm input,
+.patientForm select{
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:16px;
+
+}
+
+.patientForm button{
+
+grid-column:1/3;
+
+}
+
 </style>
 
 </head>
@@ -334,15 +365,49 @@ document.querySelector(".content").innerHTML = `
 
 <h2>👤 Patient Management</h2>
 
+<h3>➕ Add Patient</h3>
+
+<div class="patientForm">
+
+<input type="text" placeholder="Patient Name">
+
+<input type="number" placeholder="Age">
+
+<select>
+
+<option>Male</option>
+
+<option>Female</option>
+
+</select>
+
+<input type="text" placeholder="Doctor Name">
+
+<input type="text" placeholder="Floor">
+
+<input type="text" placeholder="Ward">
+
+<input type="text" placeholder="Bed">
+
+<input type="text" placeholder="Transmitter">
+
 <button class="addBtn">
 
-➕ Add Patient
+💾 Save Patient
 
 </button>
 
-<br><br>
+</div>
 
-<p>No patients added yet.</p>
+<hr>
+
+<h3>📋 Patient List</h3>
+
+<div id="patientList">
+
+No patients added yet.
+
+</div>
 
 `;
 
