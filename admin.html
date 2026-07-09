@@ -391,7 +391,7 @@ document.querySelector(".content").innerHTML = `
 
 <input type="text" placeholder="Transmitter">
 
-<button class="addBtn">
+<button class="addBtn" onclick="savePatient()">
 
 💾 Save Patient
 
@@ -410,6 +410,62 @@ No patients added yet.
 </div>
 
 `;
+
+}
+
+const SERVER="https://safedrip-backend.onrender.com";
+
+async function savePatient(){
+
+const patient={
+
+patientName:
+document.querySelector('input[placeholder="Patient Name"]').value,
+
+age:
+document.querySelector('input[placeholder="Age"]').value,
+
+gender:
+document.querySelector("select").value,
+
+doctor:
+document.querySelector('input[placeholder="Doctor Name"]').value,
+
+floor:
+document.querySelector('input[placeholder="Floor"]').value,
+
+ward:
+document.querySelector('input[placeholder="Ward"]').value,
+
+bed:
+document.querySelector('input[placeholder="Bed"]').value,
+
+transmitter:
+document.querySelector('input[placeholder="Transmitter"]').value
+
+};
+
+const response=await fetch(
+
+SERVER+"/api/patients",
+
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(patient)
+
+}
+
+);
+
+const result=await response.json();
+
+alert(result.message);
 
 }
 
