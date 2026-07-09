@@ -411,27 +411,28 @@ document.querySelector(".content").innerHTML = `
 
 <div class="patientForm">
 
-<input type="text" placeholder="Patient Name">
+<input id="patientName" type="text" placeholder="Patient Name">
 
-<input type="number" placeholder="Age">
+<input id="patientAge" type="number" placeholder="Age">
 
-<select>
+<select id="patientGender">
 
 <option>Male</option>
 
 <option>Female</option>
+<option>Rather Not To Say</option>
 
 </select>
 
-<input type="text" placeholder="Doctor Name">
+<input id="doctorName" type="text" placeholder="Doctor Name">
 
-<input type="text" placeholder="Floor">
+<input id="patientFloor" type="text" placeholder="Floor">
 
-<input type="text" placeholder="Ward">
+<input id="patientWard" type="text" placeholder="Ward">
 
-<input type="text" placeholder="Bed">
+<input id="patientBed" type="text" placeholder="Bed">
 
-<input type="text" placeholder="Transmitter">
+<input id="patientTransmitter" type="text" placeholder="Transmitter">
 
 <button class="addBtn" onclick="savePatient()">
 
@@ -464,28 +465,28 @@ async function savePatient(){
 const patient={
 
 patientName:
-document.querySelector('input[placeholder="Patient Name"]').value,
+document.getElementById("patientName").value,
 
 age:
-document.querySelector('input[placeholder="Age"]').value,
+document.getElementById("patientAge").value,
 
 gender:
-document.querySelector("select").value,
+document.getElementById("patientGender").value,
 
 doctor:
-document.querySelector('input[placeholder="Doctor Name"]').value,
+document.getElementById("doctorName").value,
 
 floor:
-document.querySelector('input[placeholder="Floor"]').value,
+document.getElementById("patientFloor").value,
 
 ward:
-document.querySelector('input[placeholder="Ward"]').value,
+document.getElementById("patientWard").value,
 
 bed:
-document.querySelector('input[placeholder="Bed"]').value,
+document.getElementById("patientBed").value,
 
 transmitter:
-document.querySelector('input[placeholder="Transmitter"]').value
+document.getElementById("patientTransmitter").value,
 
 };
 
