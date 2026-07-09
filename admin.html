@@ -271,6 +271,32 @@ box-shadow:0 3px 8px rgba(0,0,0,.1);
 
 }
 
+.editBtn{
+
+background:#ff9800;
+
+color:white;
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+margin-top:10px;
+
+font-size:16px;
+
+}
+
+.editBtn:hover{
+
+background:#e68900;
+
+}
+
 </style>
 
 </head>
@@ -524,6 +550,11 @@ async function loadPatients(){
                 <p><b>Bed:</b> ${patient.bed}</p>
 
                 <p><b>Transmitter:</b> ${patient.transmitter}</p>
+                <br>
+                <button class="editBtn"
+                onclick="editPatient('${patient._id}')">
+                ✏ Edit
+                </button>
 
                 <hr>
 
@@ -535,6 +566,12 @@ async function loadPatients(){
     }
 
     document.getElementById("patientList").innerHTML = html;
+
+}
+
+function editPatient(id){
+
+alert("Edit Patient ID : " + id);
 
 }
 
