@@ -343,6 +343,27 @@ box-sizing:border-box;
 
 }
 
+#bedNumber,
+#bedWard,
+#bedFloor,
+#bedTransmitter{
+
+width:100%;
+
+padding:12px;
+
+margin:8px 0;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:16px;
+
+box-sizing:border-box;
+
+}
+ 
 </style>
 
 </head>
@@ -592,15 +613,45 @@ document.querySelector(".content").innerHTML = `
 
 <br><br>
 
-<input id="bedWard" placeholder="Ward">
+<select id="bedWard">
+
+<option>ICU</option>
+
+<option>General</option>
+
+<option>Emergency</option>
+
+</select>
 
 <br><br>
 
-<input id="bedFloor" placeholder="Floor">
+<select id="bedFloor">
+
+<option>Ground Floor</option>
+
+<option>First Floor</option>
+
+<option>Second Floor</option>
+
+<option>Third Floor</option>
+
+</select>
 
 <br><br>
 
-<input id="bedTransmitter" placeholder="Transmitter">
+<select id="bedTransmitter">
+
+<option>SYS_01</option>
+
+<option>SYS_02</option>
+
+<option>SYS_03</option>
+
+<option>SYS_04</option>
+
+<option>SYS_05</option>
+
+</select>
 
 <br><br>
 
