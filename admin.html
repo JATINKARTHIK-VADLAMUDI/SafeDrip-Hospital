@@ -459,6 +459,7 @@ loadPatients();
 }
 
 const SERVER="https://safedrip-backend.onrender.com";
+let editingPatientId = null;
 
 async function savePatient(){
 
@@ -570,9 +571,39 @@ async function loadPatients(){
 
 }
 
-function editPatient(id){
+async function editPatient(id){
 
-alert("Edit Patient ID : " + id);
+editingPatientId = id;
+
+const response = await fetch(
+    SERVER + "/api/patients/" + id
+);
+
+const patient = await response.json();
+
+document.getElementById("patientName").value =
+patient.patientName;
+
+document.getElementById("patientAge").value =
+patient.age;
+
+document.getElementById("patientGender").value =
+patient.gender;
+
+document.getElementById("doctorName").value =
+patient.doctor;
+
+document.getElementById("patientFloor").value =
+patient.floor;
+
+document.getElementById("patientWard").value =
+patient.ward;
+
+document.getElementById("patientBed").value =
+patient.bed;
+
+document.getElementById("patientTransmitter").value =
+patient.transmitter;
 
 }
 
