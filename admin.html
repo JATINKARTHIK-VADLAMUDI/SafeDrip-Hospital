@@ -377,7 +377,7 @@ Welcome,
 
 </button>
 
-<button class="menu">
+<button class="menu" onclick="showBeds()">
 🛏 Beds
 </button>
 
@@ -580,7 +580,31 @@ async function savePatient(){
 
 }
 
-async function loadPatients(){
+async function showBeds(){
+
+document.querySelector(".content").innerHTML = `
+
+<h2>🛏 Bed Management</h2>
+
+<button class="addBtn">
+
+➕ Add Bed
+
+</button>
+
+<br><br>
+
+<div id="bedList">
+
+No beds available.
+
+</div>
+
+`;
+
+}
+
+ async function loadPatients(){
 
     const response = await fetch(SERVER + "/api/patients");
 
