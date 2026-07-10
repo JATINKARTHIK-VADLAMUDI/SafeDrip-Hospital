@@ -463,56 +463,66 @@ let editingPatientId = null;
 
 async function savePatient(){
 
-const patient={
+    const patient={
 
-patientName:
-document.getElementById("patientName").value,
+        patientName:document.getElementById("patientName").value,
 
-age:
-document.getElementById("patientAge").value,
+        age:document.getElementById("patientAge").value,
 
-gender:
-document.getElementById("patientGender").value,
+        gender:document.getElementById("patientGender").value,
 
-doctor:
-document.getElementById("doctorName").value,
+        doctor:document.getElementById("doctorName").value,
 
-floor:
-document.getElementById("patientFloor").value,
+        floor:document.getElementById("patientFloor").value,
 
-ward:
-document.getElementById("patientWard").value,
+        ward:document.getElementById("patientWard").value,
 
-bed:
-document.getElementById("patientBed").value,
+        bed:document.getElementById("patientBed").value,
 
-transmitter:
-document.getElementById("patientTransmitter").value,
+        transmitter:document.getElementById("patientTransmitter").value
 
-};
+    };
 
-const response=await fetch(
+    let url = SERVER + "/api/patients";
 
-SERVER+"/api/patients",
+    let method = "POST";
 
-{
+    if(editingPatientId){
 
-method:"POST",
+        url = SERVER + "/api/patients/" + editingPatientId;
 
-headers:{
-"Content-Type":"application/json"
-},
+        method = "PUT";
 
-body:JSON.stringify(patient)
+    }
 
-}
+    const response = await fetch(url,{
 
-);
+        method:method,
 
-const result=await response.json();
+        headers:{
+            "Content-Type":"application/json"
+        },
 
-alert(result.message);
-loadPatients();
+        body:JSON.stringify(patient)
+
+    });
+
+    const result = await response.json();
+
+    alert(result.message);
+
+    editingPatientId = null;
+
+    document.getElementById("patientName").value="";
+    document.getElementById("patientAge").value="";
+    document.getElementById("patientGender").value="Male";
+    document.getElementById("doctorName").value="";
+    document.getElementById("patientFloor").value="";
+    document.getElementById("patientWard").value="";
+    document.getElementById("patientBed").value="";
+    document.getElementById("patientTransmitter").value="";
+
+    loadPatients();
 
 }
 
