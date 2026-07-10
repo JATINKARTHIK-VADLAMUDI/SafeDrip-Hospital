@@ -581,32 +581,30 @@ async function savePatient(){
 }
 
 function showBeds(){
+
+document.querySelector(".content").innerHTML = `
+
 <h2>🛏 Bed Management</h2>
 
 <h3>➕ Add Bed</h3>
 
-<input id="bedNumber"
-placeholder="Bed Number">
+<input id="bedNumber" placeholder="Bed Number">
 
 <br><br>
 
-<input id="bedWard"
-placeholder="Ward">
+<input id="bedWard" placeholder="Ward">
 
 <br><br>
 
-<input id="bedFloor"
-placeholder="Floor">
+<input id="bedFloor" placeholder="Floor">
 
 <br><br>
 
-<input id="bedTransmitter"
-placeholder="Transmitter">
+<input id="bedTransmitter" placeholder="Transmitter">
 
 <br><br>
 
-<button class="addBtn"
-onclick="saveBed()">
+<button class="addBtn" onclick="saveBed()">
 
 💾 Save Bed
 
@@ -621,6 +619,8 @@ onclick="saveBed()">
 No beds available.
 
 </div>
+
+`;
 
 }
 
