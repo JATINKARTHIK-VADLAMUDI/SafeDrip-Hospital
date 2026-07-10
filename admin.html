@@ -323,6 +323,26 @@ background:#c62828;
 
 }
 
+#searchPatient{
+
+width:100%;
+
+padding:12px;
+
+font-size:16px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+margin-top:10px;
+
+margin-bottom:10px;
+
+box-sizing:border-box;
+
+}
+
 </style>
 
 </head>
@@ -472,6 +492,14 @@ document.querySelector(".content").innerHTML = `
 
 <h3>📋 Patient List</h3>
 
+<input
+id="searchPatient"
+type="text"
+placeholder="🔍 Search Patient..."
+onkeyup="loadPatients()">
+
+<br><br>
+
 <div id="patientList">
 
 No patients added yet.
@@ -557,6 +585,8 @@ async function loadPatients(){
     const response = await fetch(SERVER + "/api/patients");
 
     const patients = await response.json();
+    const keyword =
+    document.getElementById("searchPatient")?.value.toLowerCase() || "";
 
     let html = "";
 
@@ -569,6 +599,13 @@ async function loadPatients(){
     else{
 
         patients.forEach((patient,index)=>{
+
+            if(
+            patient.patientName.toLowerCase().includes(keyword)==false &&
+            patient.doctor.toLowerCase().includes(keyword)==false &&
+            patient.transmitter.toLowerCase().includes(keyword)==false
+            )
+            return;
 
             html += `
             <div class="patientCard">
