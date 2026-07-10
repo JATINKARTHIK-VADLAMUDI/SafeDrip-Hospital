@@ -624,6 +624,50 @@ No beds available.
 
 }
 
+async function saveBed(){
+
+    const bed={
+
+        bedNumber:
+        document.getElementById("bedNumber").value,
+
+        ward:
+        document.getElementById("bedWard").value,
+
+        floor:
+        document.getElementById("bedFloor").value,
+
+        transmitter:
+        document.getElementById("bedTransmitter").value,
+
+        status:"Available"
+
+    };
+
+    const response=await fetch(
+
+        SERVER+"/api/beds",
+
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(bed)
+
+        }
+
+    );
+
+    const result=await response.json();
+
+    alert(result.message);
+
+} 
+ 
  async function loadPatients(){
 
     const response = await fetch(SERVER + "/api/patients");
