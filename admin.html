@@ -297,6 +297,32 @@ background:#e68900;
 
 }
 
+.deleteBtn{
+
+background:#e53935;
+
+color:white;
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+margin-left:10px;
+
+font-size:16px;
+
+}
+
+.deleteBtn:hover{
+
+background:#c62828;
+
+}
+
 </style>
 
 </head>
@@ -568,6 +594,11 @@ async function loadPatients(){
                 ✏ Edit
                 </button>
 
+                <button class="deleteBtn"
+                onclick="deletePatient('${patient._id}')">
+                🗑 Delete
+                </button>
+
                 <hr>
 
             </div>
@@ -614,6 +645,33 @@ patient.bed;
 
 document.getElementById("patientTransmitter").value =
 patient.transmitter;
+
+}
+
+async function deletePatient(id){
+
+    const ok = confirm("Are you sure you want to delete this patient?");
+
+    if(!ok)
+        return;
+
+    const response = await fetch(
+
+        SERVER + "/api/patients/" + id,
+
+        {
+
+            method:"DELETE"
+
+        }
+
+    );
+
+    const result = await response.json();
+
+    alert(result.message);
+
+    loadPatients();
 
 }
 
