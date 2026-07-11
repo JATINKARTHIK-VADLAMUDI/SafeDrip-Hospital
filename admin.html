@@ -535,6 +535,7 @@ loadPatients();
 
 const SERVER="https://safedrip-backend.onrender.com";
 let editingPatientId = null;
+let editingBedId = null;
 
 async function savePatient(){
 
@@ -740,30 +741,56 @@ async function loadBeds(){
         beds.forEach((bed)=>{
 
             html += `
-
             <div class="patientCard">
-
-                <h3>${bed.bedNumber}</h3>
-
-                <p><b>Ward :</b> ${bed.ward}</p>
-
-                <p><b>Floor :</b> ${bed.floor}</p>
-
-                <p><b>Transmitter :</b> ${bed.transmitter}</p>
-
-                <p><b>Status :</b> ${bed.status}</p>
-
-                <hr>
-
+            <h3>${bed.bedNumber}</h3>
+            <p><b>🏥 Ward :</b> ${bed.ward}</p>
+            <p><b>🏢 Floor :</b> ${bed.floor}</p>
+            <p><b>📡 Transmitter :</b> ${bed.transmitter}</p>
+            <p><b>🟢 Status :</b> ${bed.status}</p>
+            <button class="editBtn"
+            onclick="editBed('${bed._id}')">
+            ✏ Edit
+            </button>
+            <button class="deleteBtn"
+            onclick="deleteBed('${bed._id}')">
+            🗑 Delete
+            </button>
+            <hr>
             </div>
-
             `;
-
         });
 
     }
 
     document.getElementById("bedList").innerHTML = html;
+
+}
+
+async function editBed(id){
+
+    editingBedId = id;
+
+    const response = await fetch(
+        SERVER + "/api/beds"
+    );
+
+    const beds = await response.json();
+
+    const bed = beds.find(b => b._id === id);
+
+    if(!bed) return;
+
+    document.getElementById("bedNumber").value =
+    bed.bedNumber;
+
+    document.getElementById("bedWard").value =
+    bed.ward;
+
+    document.getElementById("bedFloor").value =
+    bed.floor;
+
+    document.getElementById("bedTransmitter").value =
+    bed.transmitter;
 
 }
  
