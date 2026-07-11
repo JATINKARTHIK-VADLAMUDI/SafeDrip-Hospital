@@ -681,46 +681,56 @@ async function saveBed(){
 
     const bed={
 
-        bedNumber:
-        document.getElementById("bedNumber").value,
+        bedNumber:document.getElementById("bedNumber").value,
 
-        ward:
-        document.getElementById("bedWard").value,
+        ward:document.getElementById("bedWard").value,
 
-        floor:
-        document.getElementById("bedFloor").value,
+        floor:document.getElementById("bedFloor").value,
 
-        transmitter:
-        document.getElementById("bedTransmitter").value,
+        transmitter:document.getElementById("bedTransmitter").value,
 
         status:"Available"
 
     };
 
-    const response=await fetch(
+    let url = SERVER + "/api/beds";
 
-        SERVER+"/api/beds",
+    let method = "POST";
 
-        {
+    if(editingBedId){
 
-            method:"POST",
+        url = SERVER + "/api/beds/" + editingBedId;
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+        method = "PUT";
 
-            body:JSON.stringify(bed)
+    }
 
-        }
+    const response = await fetch(url,{
 
-    );
+        method:method,
 
-    const result=await response.json();
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(bed)
+
+    });
+
+    const result = await response.json();
 
     alert(result.message);
+
+    editingBedId = null;
+
+    document.getElementById("bedNumber").value = "";
+    document.getElementById("bedWard").value = "ICU";
+    document.getElementById("bedFloor").value = "Ground Floor";
+    document.getElementById("bedTransmitter").value = "SYS_01";
+
     loadBeds();
 
-} 
+}
 
 async function loadBeds(){
 
