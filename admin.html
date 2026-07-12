@@ -560,26 +560,61 @@ let editingBedId = null;
 
 async function savePatient(){
 
-    const patient={
+    // Get selected bed
+    const selectedBed =
+    document.getElementById("patientBed").value;
 
-        patientName:document.getElementById("patientName").value,
+    // Fetch all beds
+    const bedResponse = await fetch(
+        SERVER + "/api/beds"
+    );
 
-        age:document.getElementById("patientAge").value,
+    const beds = await bedResponse.json();
 
-        gender:document.getElementById("patientGender").value,
+    // Find selected bed details
+    const bed = beds.find(
+        b => b.bedNumber === selectedBed
+    );
 
-        doctor:document.getElementById("doctorName").value,
+    // Safety check
+    if(!bed){
 
-        floor:document.getElementById("patientFloor").value,
+        alert("Selected bed not found!");
 
-        ward:document.getElementById("patientWard").value,
+        return;
 
-        bed:document.getElementById("patientBed").value,
+    }
 
-        transmitter:document.getElementById("patientTransmitter").value
+    // Create patient object
+    const patient = {
+
+        patientName:
+        document.getElementById("patientName").value,
+
+        age:
+        document.getElementById("patientAge").value,
+
+        gender:
+        document.getElementById("patientGender").value,
+
+        doctor:
+        document.getElementById("doctorName").value,
+
+        bed:
+        selectedBed,
+
+        ward:
+        bed.ward,
+
+        floor:
+        bed.floor,
+
+        transmitter:
+        bed.transmitter
 
     };
 
+    // Decide Add or Update
     let url = SERVER + "/api/patients";
 
     let method = "POST";
@@ -592,15 +627,16 @@ async function savePatient(){
 
     }
 
+    // Save patient
     const response = await fetch(url,{
 
-        method:method,
+        method: method,
 
         headers:{
             "Content-Type":"application/json"
         },
 
-        body:JSON.stringify(patient)
+        body: JSON.stringify(patient)
 
     });
 
@@ -610,14 +646,17 @@ async function savePatient(){
 
     editingPatientId = null;
 
-    document.getElementById("patientName").value="";
-    document.getElementById("patientAge").value="";
-    document.getElementById("patientGender").value="Male";
-    document.getElementById("doctorName").value="";
-    document.getElementById("patientFloor").value="";
-    document.getElementById("patientWard").value="";
-    document.getElementById("patientBed").value="";
-    document.getElementById("patientTransmitter").value="";
+    // Clear form
+    document.getElementById("patientName").value = "";
+    document.getElementById("patientAge").value = "";
+    document.getElementById("patientGender").value = "Male";
+    document.getElementById("doctorName").value = "";
+
+    if(document.getElementById("patientBed").options.length > 0){
+
+        document.getElementById("patientBed").selectedIndex = 0;
+
+    }
 
     loadPatients();
 
