@@ -874,9 +874,21 @@ async function bedChanged(){
     const selectedBed =
     document.getElementById("patientBed").value;
 
-    console.log("Selected Bed :", selectedBed);
+    const response = await fetch(
+        SERVER + "/api/beds"
+    );
 
-} 
+    const beds = await response.json();
+
+    const bed = beds.find(
+
+        b => b.bedNumber === selectedBed
+
+    );
+
+    console.log(bed);
+
+}
  
 async function editBed(id){
 
