@@ -831,6 +831,29 @@ async function loadBeds(){
     }
 
     document.getElementById("bedList").innerHTML = html;
+    async function loadBedDropdown(){
+
+    const response = await fetch(
+        SERVER + "/api/beds"
+    );
+
+    const beds = await response.json();
+
+    let html = "";
+
+    beds.forEach((bed)=>{
+
+        html += `
+            <option value="${bed.bedNumber}">
+                ${bed.bedNumber}
+            </option>
+        `;
+
+    });
+
+    document.getElementById("patientBed").innerHTML = html;
+
+}
 
 }
 
