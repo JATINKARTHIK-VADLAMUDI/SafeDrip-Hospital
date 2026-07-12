@@ -363,6 +363,26 @@ font-size:16px;
 box-sizing:border-box;
 
 }
+
+#searchBed{
+
+width:100%;
+
+padding:12px;
+
+font-size:16px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+margin-top:10px;
+
+margin-bottom:10px;
+
+box-sizing:border-box;
+
+} 
  
 </style>
 
@@ -666,6 +686,14 @@ document.querySelector(".content").innerHTML = `
 
 <h3>📋 Bed List</h3>
 
+<input
+id="searchBed"
+type="text"
+placeholder="🔍 Search Bed..."
+onkeyup="loadBeds()">
+
+<br><br>
+
 <div id="bedList">
 
 No beds available.
@@ -737,6 +765,8 @@ async function loadBeds(){
     const response = await fetch(SERVER + "/api/beds");
 
     const beds = await response.json();
+    const keyword =
+    document.getElementById("searchBed")?.value.toLowerCase() || "";
 
     let html = "";
 
@@ -750,25 +780,53 @@ async function loadBeds(){
 
         beds.forEach((bed)=>{
 
-            html += `
-            <div class="patientCard">
-            <h3>${bed.bedNumber}</h3>
-            <p><b>🏥 Ward :</b> ${bed.ward}</p>
-            <p><b>🏢 Floor :</b> ${bed.floor}</p>
-            <p><b>📡 Transmitter :</b> ${bed.transmitter}</p>
-            <p><b>🟢 Status :</b> ${bed.status}</p>
-            <button class="editBtn"
-            onclick="editBed('${bed._id}')">
-            ✏ Edit
-            </button>
-            <button class="deleteBtn"
-            onclick="deleteBed('${bed._id}')">
-            🗑 Delete
-            </button>
-            <hr>
-            </div>
-            `;
-        });
+    if(
+
+        bed.bedNumber.toLowerCase().includes(keyword)==false &&
+
+        bed.ward.toLowerCase().includes(keyword)==false &&
+
+        bed.floor.toLowerCase().includes(keyword)==false &&
+
+        bed.transmitter.toLowerCase().includes(keyword)==false
+
+    )
+
+    return;
+
+    html += `
+    <div class="patientCard">
+
+    <h3>${bed.bedNumber}</h3>
+
+    <p><b>🏥 Ward :</b> ${bed.ward}</p>
+
+    <p><b>🏢 Floor :</b> ${bed.floor}</p>
+
+    <p><b>📡 Transmitter :</b> ${bed.transmitter}</p>
+
+    <p><b>🟢 Status :</b> ${bed.status}</p>
+
+    <button class="editBtn"
+    onclick="editBed('${bed._id}')">
+
+    ✏ Edit
+
+    </button>
+
+    <button class="deleteBtn"
+    onclick="deleteBed('${bed._id}')">
+
+    🗑 Delete
+
+    </button>
+
+    <hr>
+
+    </div>
+
+    `;
+});
 
     }
 
