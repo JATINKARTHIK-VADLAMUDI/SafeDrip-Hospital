@@ -514,7 +514,8 @@ document.querySelector(".content").innerHTML = `
 <input id="doctorName" type="text" placeholder="Doctor Name">
 
 
-<select id="patientBed">
+<select id="patientBed"
+onchange="bedChanged()">
 
 <option>Loading Beds...</option>
 
@@ -868,6 +869,15 @@ async function loadBedDropdown(){
 
 }
 
+async function bedChanged(){
+
+    const selectedBed =
+    document.getElementById("patientBed").value;
+
+    console.log("Selected Bed :", selectedBed);
+
+} 
+ 
 async function editBed(id){
 
     editingBedId = id;
