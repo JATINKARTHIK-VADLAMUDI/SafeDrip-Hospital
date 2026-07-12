@@ -838,12 +838,15 @@ async function loadBeds(){
 
 async function loadBedDropdown(){
 
+    console.log("Function Started");
+
     const response = await fetch(
         SERVER + "/api/beds"
     );
 
     const beds = await response.json();
-    console.log(beds);
+
+    console.log("Beds Received:", beds);
 
     let html = "";
 
@@ -857,7 +860,12 @@ async function loadBedDropdown(){
 
     });
 
+    console.log("Generated HTML:", html);
+
     document.getElementById("patientBed").innerHTML = html;
+
+    console.log("Dropdown Updated");
+
 }
 
 async function editBed(id){
